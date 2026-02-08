@@ -1,0 +1,86 @@
+---
+const experiences = [
+  {
+    label: "FINE DINING",
+    title: "The Beacon Restaurant",
+    description: "Savor coastal cuisine crafted from locally sourced ingredients by our Michelin-starred Chef Marco Rivera. Oceanfront dining at its finest.",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+    linkText: "Reserve a Table",
+    linkHref: "/dining",
+    reverse: false
+  },
+  {
+    label: "WELLNESS",
+    title: "Tidal Spa & Wellness",
+    description: "Surrender to serenity with ocean-inspired treatments, hydrotherapy pools, and meditation gardens overlooking the sea.",
+    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874",
+    linkText: "Explore Treatments",
+    linkHref: "/wellness",
+    reverse: true
+  },
+  {
+    label: "ADVENTURES",
+    title: "Coastal Explorations",
+    description: "From sunrise kayaking to sunset sailing, our concierge team curates unforgettable coastal adventures tailored just for you.",
+    image: "https://images.unsplash.com/photo-1530053969600-caed2596d242",
+    linkText: "Plan Your Adventure",
+    linkHref: "/experiences",
+    reverse: false
+  }
+];
+---
+
+<section id="experiences" class="py-24 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header */}
+    <div class="text-center mb-20 animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+      <span class="block text-ocean font-body uppercase tracking-[0.2em] text-sm font-semibold mb-4">
+        Curated Experiences
+      </span>
+      <h2 class="font-heading text-navy text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        More Than a Stay
+      </h2>
+    </div>
+
+    {/* Experiences Layout */}
+    <div class="space-y-20 lg:space-y-32">
+      {experiences.map((exp, index) => (
+        <div class={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${exp.reverse ? 'lg:flex-row-reverse' : ''} animate-on-scroll opacity-0 translate-y-12 transition-all duration-1000 ease-out`} style={`transition-delay: ${index * 100}ms`}>
+          
+          {/* Image Column */}
+          <div class="w-full lg:w-1/2">
+            <div class="relative rounded-lg overflow-hidden shadow-xl aspect-[4/3] group">
+              <img 
+                src={exp.image} 
+                alt={exp.title} 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+          </div>
+
+          {/* Text Column */}
+          <div class="w-full lg:w-1/2 text-center lg:text-left">
+            <span class="block text-ocean font-body uppercase tracking-[0.15em] text-xs font-bold mb-4">
+              {exp.label}
+            </span>
+            <h3 class="font-heading text-navy text-3xl md:text-4xl font-bold mb-6">
+              {exp.title}
+            </h3>
+            <p class="text-charcoal leading-relaxed text-lg mb-8 max-w-xl mx-auto lg:mx-0">
+              {exp.description}
+            </p>
+            <a 
+              href={exp.linkHref} 
+              class="inline-flex items-center gap-2 text-gold font-semibold text-sm uppercase tracking-wider hover:text-navy transition-colors duration-300 group"
+            >
+              {exp.linkText}
+              <span class="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+            </a>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

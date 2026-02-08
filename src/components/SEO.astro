@@ -1,0 +1,88 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article';
+}
+
+const { 
+  title, 
+  description, 
+  image = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=630&fit=crop',
+  url = Astro.url.href,
+  type = 'website'
+} = Astro.props;
+
+const siteName = 'Lighthouse Point Hotel';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Structured Data for Hotel
+const hotelSchema = {
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "name": "Lighthouse Point Hotel",
+  "description": "Luxury coastal hotel offering oceanfront accommodations, fine dining, spa services, and curated experiences in Lighthouse Point, Florida.",
+  "image": image,
+  "url": "https://lighthousepointhotel.com",
+  "telephone": "+1-954-555-0123",
+  "email": "hello@lighthousepointhotel.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Coastal Drive",
+    "addressLocality": "Lighthouse Point",
+    "addressRegion": "FL",
+    "postalCode": "33064",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "26.275",
+    "longitude": "-80.087"
+  },
+  "starRating": {
+    "@type": "Rating",
+    "ratingValue": "4",
+    "bestRating": "5"
+  },
+  "priceRange": "$199 - $899",
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Ocean View", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Restaurant", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Spa", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Fitness Center", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Parking", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Accessible", "value": true }
+  ],
+  "checkinTime": "15:00",
+  "checkoutTime": "11:00",
+  "petsAllowed": true
+};
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={image} />
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(hotelSchema)} />

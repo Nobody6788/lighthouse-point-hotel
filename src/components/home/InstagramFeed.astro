@@ -1,0 +1,67 @@
+---
+import Instagram from '../icons/Instagram.astro';
+
+const feedImages = [
+  "https://images.unsplash.com/photo-1566073771259-6a8506099945", // Pool/Hotel
+  "https://images.unsplash.com/photo-1559339352-11d035aa65de", // Drink/Relax
+  "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9", // Resort view
+  "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format", // Beach
+  "https://images.unsplash.com/photo-1514362545857-3bc16549766b", // Food
+  "https://images.unsplash.com/photo-1540541338287-41700207dee6" // Spa/Relax
+]; // Using placeholders similar to hotel vibe
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <div class="text-center mb-12 animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+      <h2 class="font-heading text-navy text-3xl md:text-4xl font-bold mb-2">
+        Share Your Moments
+      </h2>
+      <a 
+        href="https://instagram.com/LighthousePointHotel" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="text-ocean font-medium hover:text-gold transition-colors duration-300"
+      >
+        @LighthousePointHotel
+      </a>
+    </div>
+
+    {/* Instagram Grid */}
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1 md:gap-4 mb-12 animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-200">
+      {feedImages.map((img, index) => (
+        <a 
+          href="https://instagram.com/LighthousePointHotel" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="block relative group overflow-hidden aspect-square rounded-md lg:rounded-none"
+        >
+          <img 
+            src={img} 
+            alt="Instagram post" 
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          {/* Hover Overlay */}
+          <div class="absolute inset-0 bg-navy/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <Instagram class="w-8 h-8 text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-100" />
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {/* Follow Button */}
+    <div class="text-center animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-400">
+      <a 
+        href="https://instagram.com/LighthousePointHotel" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-ocean font-semibold hover:text-gold transition-colors duration-300 group"
+      >
+        <Instagram class="w-5 h-5" />
+        Follow Us on Instagram
+      </a>
+    </div>
+  </div>
+</section>

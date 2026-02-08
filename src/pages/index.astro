@@ -1,11 +1,136 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WelcomeSection from '../components/home/WelcomeSection.astro';
+import FeaturedRooms from '../components/home/FeaturedRooms.astro';
+import ExperiencesSection from '../components/home/ExperiencesSection.astro';
+import TestimonialsSection from '../components/home/TestimonialsSection.astro';
+import BookingCTA from '../components/home/BookingCTA.astro';
+import InstagramFeed from '../components/home/InstagramFeed.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const heroImage = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout 
+  title="Lighthouse Point Hotel | Luxury Coastal Retreat" 
+  description="Experience oceanfront luxury at Lighthouse Point Hotel. Stunning views, world-class dining, and unforgettable coastal experiences."
+>
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <!-- Background Image with Parallax -->
+      <div 
+        class="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat z-0"
+        style={`background-image: url('${heroImage}');`}
+      >
+      </div>
+
+      <!-- Dark Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/30 to-transparent z-10"></div>
+
+      <!-- Content -->
+      <div class="relative z-20 container mx-auto px-4 text-center text-white pt-20">
+        <!-- Welcome Text -->
+        <p class="animate-fade-up-1 text-gold font-body uppercase tracking-[0.2em] text-sm md:text-base font-medium mb-4">
+          Welcome to
+        </p>
+
+        <!-- Main Title -->
+        <h1 class="animate-fade-up-2 font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+          Lighthouse Point Hotel
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="animate-fade-up-3 text-sand/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+          Where every sunrise paints a new masterpiece across the Atlantic, 
+          and every moment is crafted for your perfect escape.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="animate-fade-up-4 flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a href="/book" class="btn-primary min-w-[180px] text-center">
+            Book Your Stay
+          </a>
+          <a href="/explore" class="px-8 py-3 rounded border border-white text-white font-semibold transition-all duration-300 hover:bg-white hover:text-navy hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 min-w-[180px] text-center">
+            Explore Rooms
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="animate-fade-in-delayed absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-white/80">
+        <span class="text-xs uppercase tracking-widest font-light">Scroll to Discover</span>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-6 w-6 animate-bounce" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </section>
+
+    <WelcomeSection />
+    <FeaturedRooms />
+    <ExperiencesSection />
+    <TestimonialsSection />
+    <BookingCTA />
+    <InstagramFeed />
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Custom Animations */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-fade-up-1 {
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+
+  .animate-fade-up-2 {
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.7s; /* Slight overlap for smooth sequence */
+  }
+
+  .animate-fade-up-3 {
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.9s;
+  }
+
+  .animate-fade-up-4 {
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 1.1s;
+  }
+
+  .animate-fade-in-delayed {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 2s;
+  }
+</style>

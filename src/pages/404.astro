@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="404 - Page Not Found | Lighthouse Point Hotel" 
+  description="The page you're looking for cannot be found. Return to Lighthouse Point Hotel homepage."
+>
+  <Header />
+
+  <main class="min-h-screen bg-sand/20 flex items-center justify-center py-20 px-4 relative overflow-hidden">
+    
+    {/* Large Background 404 */}
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <span class="font-heading text-[20rem] md:text-[30rem] text-navy opacity-5 select-none">404</span>
+    </div>
+
+    <div class="relative z-10 text-center max-w-2xl">
+      
+      {/* Lighthouse SVG Illustration */}
+      <div class="mb-8 flex justify-center">
+        <svg width="150" height="150" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-float">
+          {/* Lighthouse Base */}
+          <rect x="80" y="140" width="40" height="20" fill="#1B2A4A" rx="2"/>
+          {/* Lighthouse Body */}
+          <path d="M85 140 L90 80 L110 80 L115 140 Z" fill="#1B2A4A"/>
+          {/* Lighthouse Top */}
+          <rect x="85" y="70" width="30" height="10" fill="#C9A961" rx="2"/>
+          {/* Light Beam */}
+          <path d="M70 75 L100 75 L60 50 Z" fill="#C9A961" opacity="0.3"/>
+          <path d="M100 75 L130 75 L140 50 Z" fill="#C9A961" opacity="0.3"/>
+          {/* Windows */}
+          <rect x="95" y="100" width="10" height="12" fill="#C9A961" opacity="0.6"/>
+          <rect x="95" y="120" width="10" height="12" fill="#C9A961" opacity="0.6"/>
+          {/* Waves */}
+          <path d="M20 160 Q 40 155, 60 160 T 100 160 T 140 160 T 180 160" stroke="#1B2A4A" stroke-width="2" fill="none" opacity="0.3"/>
+          <path d="M20 170 Q 40 165, 60 170 T 100 170 T 140 170 T 180 170" stroke="#1B2A4A" stroke-width="2" fill="none" opacity="0.2"/>
+        </svg>
+      </div>
+
+      <h1 class="font-heading text-4xl md:text-5xl text-navy font-bold mb-4">
+        Lost at Sea?
+      </h1>
+      
+      <p class="text-lg text-charcoal/80 mb-8 leading-relaxed">
+        The page you're looking for has drifted away. Let us guide you back to shore.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a href="/" class="btn-primary inline-flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Return Home
+        </a>
+        <a href="/rooms" class="px-6 py-3 border-2 border-navy text-navy font-semibold rounded hover:bg-navy hover:text-white transition-all duration-300 inline-flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          View Our Rooms
+        </a>
+      </div>
+
+      {/* Search Field */}
+      <div class="max-w-md mx-auto">
+        <form action="/search" method="GET" class="relative">
+          <input 
+            type="search" 
+            name="q"
+            placeholder="Or try searching..." 
+            class="w-full border border-gray-300 rounded-lg py-3 pl-4 pr-12 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all"
+          />
+          <button 
+            type="submit" 
+            class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-ocean hover:text-gold transition-colors"
+            aria-label="Search"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+</style>

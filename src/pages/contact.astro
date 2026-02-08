@@ -1,0 +1,338 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQAccordion from '../components/contact/FAQAccordion';
+
+const heroImage = "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4"; // Aerial coastline
+
+const faqItems = [
+  {
+    question: "What are the check-in and check-out times?",
+    answer: "Check-in is at 3:00 PM and check-out is at 11:00 AM. Early check-in and late check-out are available upon request, subject to availability. Please contact our front desk to arrange."
+  },
+  {
+    question: "Is parking available?",
+    answer: "Yes, we offer complimentary valet parking for all guests. Self-parking is also available in our secure garage. Electric vehicle charging stations are available at no additional cost."
+  },
+  {
+    question: "Do you allow pets?",
+    answer: "We welcome small pets (under 25 lbs) with a $50 per night pet fee. Please inform us at the time of booking. We provide pet beds, bowls, and treats to make your furry friend feel at home."
+  },
+  {
+    question: "Is there a cancellation policy?",
+    answer: "Free cancellation up to 48 hours before check-in. Cancellations made within 48 hours of arrival will be charged one night's stay. Special event dates may have different policies."
+  },
+  {
+    question: "Do you offer airport transfers?",
+    answer: "Yes, we offer private car service from Fort Lauderdale-Hollywood International Airport (FLL) for $85 each way. Advance booking is recommended. Contact our concierge to arrange."
+  },
+  {
+    question: "Is the hotel accessible?",
+    answer: "Yes, we are fully ADA compliant with accessible rooms, elevators, ramps, and facilities throughout the property. Please let us know your specific needs when booking so we can ensure your comfort."
+  }
+];
+---
+
+<BaseLayout 
+  title="Contact Us | Lighthouse Point Hotel" 
+  description="Get in touch with Lighthouse Point Hotel. We're here to help with reservations, inquiries, and any questions you may have."
+>
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
+      <div 
+        class="absolute inset-0 bg-cover bg-center z-0"
+        style={`background-image: url('${heroImage}');`}
+      >
+      </div>
+      <div class="absolute inset-0 bg-navy/50 z-10"></div>
+      
+      <div class="relative z-20 container mx-auto px-4 text-center text-white">
+        <span class="block text-gold font-body uppercase tracking-[0.2em] text-sm font-semibold mb-4 animate-fade-up-1">
+          Get In Touch
+        </span>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4 animate-fade-up-2">
+          Contact Us
+        </h1>
+        <p class="text-sand text-lg font-light max-w-2xl mx-auto animate-fade-up-3">
+          We'd love to hear from you
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN CONTACT SECTION -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+          
+          <!-- LEFT COLUMN: Contact Form -->
+          <div class="w-full lg:w-[55%]">
+            <h2 class="font-heading text-3xl text-navy font-bold mb-3">Send Us a Message</h2>
+            <p class="text-charcoal/70 mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
+
+            <form 
+              name="contact" 
+              method="POST" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field"
+              class="space-y-6"
+            >
+              {/* Hidden fields for Netlify */}
+              <input type="hidden" name="form-name" value="contact" />
+              <p class="hidden">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+              </p>
+
+              {/* Row 1: First Name & Last Name */}
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label for="firstName" class="block text-sm font-medium text-navy mb-2">
+                    First Name <span class="text-gold">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="firstName" 
+                    name="firstName" 
+                    required 
+                    class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all"
+                  />
+                </div>
+                <div>
+                  <label for="lastName" class="block text-sm font-medium text-navy mb-2">
+                    Last Name <span class="text-gold">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="lastName" 
+                    name="lastName" 
+                    required 
+                    class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Email & Phone */}
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label for="email" class="block text-sm font-medium text-navy mb-2">
+                    Email <span class="text-gold">*</span>
+                  </label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all"
+                  />
+                </div>
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-navy mb-2">
+                    Phone
+                  </label>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Row 3: Subject */}
+              <div>
+                <label for="subject" class="block text-sm font-medium text-navy mb-2">
+                  Subject <span class="text-gold">*</span>
+                </label>
+                <select 
+                  id="subject" 
+                  name="subject" 
+                  required 
+                  class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all appearance-none bg-white"
+                >
+                  <option value="">Select a subject</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="reservations">Reservations</option>
+                  <option value="dining">Dining</option>
+                  <option value="events">Events</option>
+                  <option value="spa">Spa & Wellness</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              {/* Row 4: Preferred Contact Method */}
+              <div>
+                <label class="block text-sm font-medium text-navy mb-3">
+                  Preferred Contact Method
+                </label>
+                <div class="flex flex-wrap gap-6">
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="contactMethod" value="email" class="w-4 h-4 text-gold focus:ring-gold border-gray-300" checked />
+                    <span class="ml-2 text-charcoal">Email</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="contactMethod" value="phone" class="w-4 h-4 text-gold focus:ring-gold border-gray-300" />
+                    <span class="ml-2 text-charcoal">Phone</span>
+                  </label>
+                  <label class="flex items-center cursor-pointer">
+                    <input type="radio" name="contactMethod" value="either" class="w-4 h-4 text-gold focus:ring-gold border-gray-300" />
+                    <span class="ml-2 text-charcoal">Either</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Row 5: Message */}
+              <div>
+                <label for="message" class="block text-sm font-medium text-navy mb-2">
+                  Message <span class="text-gold">*</span>
+                </label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows="5" 
+                  required 
+                  class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:border-ocean focus:ring-2 focus:ring-ocean/20 transition-all resize-none"
+                ></textarea>
+              </div>
+
+              {/* Row 6: Privacy Policy */}
+              <div class="flex items-start">
+                <input 
+                  type="checkbox" 
+                  id="privacy" 
+                  name="privacy" 
+                  required 
+                  class="w-4 h-4 text-gold focus:ring-gold border-gray-300 rounded mt-1"
+                />
+                <label for="privacy" class="ml-3 text-sm text-charcoal/80">
+                  I agree to the <a href="/privacy" class="text-ocean hover:text-gold transition-colors underline">privacy policy</a>
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <button 
+                type="submit" 
+                class="w-full md:w-auto btn-primary px-8 py-3 flex items-center justify-center gap-2 shadow-lg"
+              >
+                Send Message
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- RIGHT COLUMN: Contact Info & Map -->
+          <div class="w-full lg:w-[45%] space-y-6">
+            
+            {/* Address Card */}
+            <div class="bg-sand/20 rounded-lg p-6 flex gap-4">
+              <div class="text-3xl flex-shrink-0">📍</div>
+              <div>
+                <h3 class="font-heading text-lg text-navy font-bold mb-2">Address</h3>
+                <p class="text-charcoal/80 mb-2">123 Coastal Drive<br/>Lighthouse Point, FL 33064</p>
+                <a href="https://maps.google.com/?q=Lighthouse+Point+FL" target="_blank" rel="noopener noreferrer" class="text-ocean hover:text-gold transition-colors text-sm font-medium inline-flex items-center gap-1">
+                  Get Directions →
+                </a>
+              </div>
+            </div>
+
+            {/* Phone Card */}
+            <div class="bg-sand/20 rounded-lg p-6 flex gap-4">
+              <div class="text-3xl flex-shrink-0">📞</div>
+              <div>
+                <h3 class="font-heading text-lg text-navy font-bold mb-2">Phone</h3>
+                <p class="text-charcoal/80">
+                  <a href="tel:+19545550123" class="hover:text-ocean transition-colors">Front Desk: (954) 555-0123</a><br/>
+                  <a href="tel:+19545550124" class="hover:text-ocean transition-colors">Reservations: (954) 555-0124</a>
+                </p>
+              </div>
+            </div>
+
+            {/* Email Card */}
+            <div class="bg-sand/20 rounded-lg p-6 flex gap-4">
+              <div class="text-3xl flex-shrink-0">📧</div>
+              <div>
+                <h3 class="font-heading text-lg text-navy font-bold mb-2">Email</h3>
+                <p class="text-charcoal/80">
+                  <a href="mailto:hello@lighthousepointhotel.com" class="hover:text-ocean transition-colors break-all">hello@lighthousepointhotel.com</a><br/>
+                  <a href="mailto:reservations@lighthousepointhotel.com" class="hover:text-ocean transition-colors break-all">reservations@lighthousepointhotel.com</a>
+                </p>
+              </div>
+            </div>
+
+            {/* Hours Card */}
+            <div class="bg-sand/20 rounded-lg p-6 flex gap-4">
+              <div class="text-3xl flex-shrink-0">🕐</div>
+              <div>
+                <h3 class="font-heading text-lg text-navy font-bold mb-2">Hours</h3>
+                <p class="text-charcoal/80">
+                  Front Desk: 24/7<br/>
+                  Reservations: 8AM - 8PM EST<br/>
+                  Restaurant: <a href="/dining" class="text-ocean hover:text-gold transition-colors">See dining page</a>
+                </p>
+              </div>
+            </div>
+
+            {/* Map */}
+            <div class="rounded-lg overflow-hidden shadow-lg">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.8!2d-80.087!3d26.275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDE2JzMwLjAiTiA4MMKwMDUnMTMuMiJX!5e0!3m2!1sen!2sus!4v1234567890"
+                width="100%" 
+                height="300" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Lighthouse Point Hotel Location"
+              ></iframe>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="py-16 bg-sand/20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-heading text-3xl md:text-4xl text-navy font-bold text-center mb-12">
+          Frequently Asked Questions
+        </h2>
+        
+        <FAQAccordion client:visible items={faqItems} />
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-up-1 {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .animate-fade-up-2 {
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  .animate-fade-up-3 {
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+import TestimonialSlider from './TestimonialSlider';
+
+const testimonials = [
+  {
+    quote: "From the moment we arrived, we felt like family. The ocean view suite was breathtaking, and Chef Marco's tasting menu was the highlight of our anniversary trip. We're already planning our return.",
+    author: "Sarah & James Mitchell",
+    detail: "Stayed in Ocean View Suite · October 2024",
+    rating: 5
+  },
+  {
+    quote: "The Lighthouse Penthouse exceeded every expectation. Waking up to 360-degree views of the Atlantic was surreal. The staff anticipated our every need before we even asked.",
+    author: "David Chen",
+    detail: "Stayed in Lighthouse Penthouse · September 2024",
+    rating: 5
+  },
+  {
+    quote: "The Tidal Spa experience was transformative. I've visited luxury spas worldwide, and this ranks among the very best. Pure coastal bliss.",
+    author: "Amara Okafor",
+    detail: "Stayed in Harbor View Room · July 2024",
+    rating: 5
+  },
+  {
+    quote: "A hidden gem! The Beacon Restaurant alone is worth the trip. Combined with the stunning rooms and warm hospitality — it's the complete package.",
+    author: "Robert & Lisa Park",
+    detail: "Stayed in Garden Suite · August 2024",
+    rating: 5
+  }
+];
+---
+
+<section id="testimonials" class="py-24 bg-navy overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header */}
+    <div class="text-center mb-16 animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+      <span class="block text-gold font-body uppercase tracking-[0.2em] text-sm font-semibold mb-4">
+        Guest Stories
+      </span>
+      <h2 class="font-heading text-white text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        What Our Guests Say
+      </h2>
+    </div>
+
+    {/* Carousel */}
+    <div class="animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-200">
+      <TestimonialSlider client:visible testimonials={testimonials} />
+    </div>
+  </div>
+</section>
+
+<script>
+  // Re-use the intersection observer logic if it's not global
+  // Ideally this should be a shared utility, but for now we inline or rely on the one in Welcome/Featured/Experiences
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('#testimonials .animate-on-scroll').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FilterBar from '../../components/rooms/FilterBar';
+
+const heroImage = "https://images.unsplash.com/photo-1590490360182-c33d57733427";
+
+const rooms = [
+  {
+    id: 1,
+    name: "Ocean View Suite",
+    price: 389,
+    size: "520 sq ft",
+    bed: "King Bed",
+    view: "Ocean View",
+    description: "Wake up to panoramic Atlantic views from your private balcony. This spacious suite features a separate living area, marble bathroom with soaking tub, and coastal-inspired décor.",
+    image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32",
+    badge: "Most Popular",
+    amenities: ["Free Wifi", "Smart TV", "Mini Bar", "Balcony"]
+  },
+  {
+    id: 2,
+    name: "Harbor View Room",
+    price: 259,
+    size: "380 sq ft",
+    bed: "Queen Bed",
+    view: "Harbor View",
+    description: "Overlooking the charming lighthouse harbor, this cozy room offers a quiet retreat with nautical touches, plush bedding, and a workspace for the modern traveler.",
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+    badge: "Best Value",
+    amenities: ["Free Wifi", "Work Desk", "Coffee Maker", "Rain Shower"]
+  },
+  {
+    id: 3,
+    name: "Lighthouse Penthouse",
+    price: 899,
+    size: "1200 sq ft",
+    bed: "2 King Beds",
+    view: "Panoramic",
+    description: "Our crown jewel — a two-story penthouse with 360° views, private wraparound terrace, full gourmet kitchen, and dedicated butler service for the ultimate luxury experience.",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304",
+    badge: "Luxury",
+    amenities: ["Butler Service", "Private Terrace", "Kitchen", "Jacuzzi"]
+  },
+  {
+    id: 4,
+    name: "Garden Retreat",
+    price: 199,
+    size: "340 sq ft",
+    bed: "Queen Bed",
+    view: "Garden View",
+    description: "Nestled among our lush tropical gardens, this room offers a serene escape with a private patio, outdoor seating, and easy access to the resort pool.",
+    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c", // Placeholder garden image
+    badge: "",
+    amenities: ["Private Patio", "Pool Access", "Free Wifi", "Garden View"]
+  },
+  {
+    id: 5,
+    name: "Coastal Deluxe King",
+    price: 319,
+    size: "450 sq ft",
+    bed: "King Bed",
+    view: "Partial Ocean",
+    description: "Enjoy partial ocean views and extra space in our Deluxe King room. Features a seating area, premium linens, and our signature rainfall shower.",
+    image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a", // Placeholder deluxe room
+    badge: "",
+    amenities: ["Seating Area", "King Bed", "Smart TV", "Premium Linens"]
+  },
+  {
+    id: 6,
+    name: "Family Seaside Suite",
+    price: 459,
+    size: "680 sq ft",
+    bed: "King + Twin Beds",
+    view: "Ocean View",
+    description: "Perfect for families, this suite offers a master bedroom with a King bed and a separate area with two Twin beds. Includes a kitchenette and dining area.",
+    image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461", // Placeholder family suite
+    badge: "Family Friendly",
+    amenities: ["Kitchenette", "2 Bedrooms", "Dining Area", "Ocean View"]
+  }
+];
+---
+
+<BaseLayout 
+  title="Rooms & Suites | Lighthouse Point Hotel" 
+  description="Explore our luxurious accommodations, from cozy garden rooms to our stunning ocean view suites. Find your perfect coastal sanctuary."
+>
+  <Header />
+
+  <main>
+    {/* HERO SECTION */}
+    <section class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <div 
+        class="absolute inset-0 bg-cover bg-center z-0"
+        style={`background-image: url('${heroImage}');`}
+      >
+      </div>
+      <div class="absolute inset-0 bg-navy/50 z-10"></div>
+      
+      <div class="relative z-20 container mx-auto px-4 text-center text-white">
+        <nav class="flex justify-center mb-4 text-sm font-medium text-sand/80" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-2">
+            <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+            <li><span class="text-white/50">&gt;</span></li>
+            <li class="text-white" aria-current="page">Rooms & Suites</li>
+          </ol>
+        </nav>
+        
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-up-1">
+          Rooms & Suites
+        </h1>
+        <p class="text-sand text-lg md:text-xl font-light max-w-2xl mx-auto animate-fade-up-2">
+          Find your perfect coastal sanctuary
+        </p>
+      </div>
+    </section>
+
+    {/* FILTER BAR Island */}
+    <FilterBar client:visible />
+
+    {/* ROOMS GRID */}
+    <section class="py-16 bg-sand/30">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {rooms.map((room) => (
+            <div class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col md:flex-row h-full">
+              
+              {/* Image (Left/Top) */}
+              <div class="relative w-full md:w-2/5 aspect-[4/3] md:aspect-auto md:h-full overflow-hidden">
+                <img 
+                  src={room.image} 
+                  alt={room.name} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                
+                {/* Badge if exists */}
+                {room.badge && (
+                  <div class="absolute top-4 left-4 bg-gold text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm z-10">
+                    {room.badge}
+                  </div>
+                )}
+                
+                {/* Hover Overlay */}
+                <div class="absolute inset-0 bg-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              
+              {/* Content (Right/Bottom) */}
+              <div class="w-full md:w-3/5 p-6 flex flex-col justify-between">
+                <div>
+                  <h3 class="font-heading text-2xl text-navy font-bold mb-2 group-hover:text-ocean transition-colors duration-300">
+                    {room.name}
+                  </h3>
+                  
+                  <div class="flex flex-wrap gap-x-4 text-xs text-charcoal/60 mb-3 font-medium uppercase tracking-wide">
+                    <span>{room.size}</span>
+                    <span class="text-gold">•</span>
+                    <span>{room.bed}</span>
+                    <span class="text-gold">•</span>
+                    <span>{room.view}</span>
+                  </div>
+                  
+                  <p class="text-charcoal/80 text-sm leading-relaxed mb-4 line-clamp-3">
+                    {room.description}
+                  </p>
+                  
+                  {/* Amenities Grid */}
+                  <div class="grid grid-cols-2 gap-2 mb-6">
+                    {room.amenities.map(item => (
+                      <div class="flex items-center gap-2 text-xs text-charcoal/70">
+                        <span class="text-gold">✓</span> {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="h-px w-full bg-sand/50 mb-4"></div>
+                  
+                  <div class="flex items-center justify-between">
+                    <div class="flex flex-col">
+                      <span class="text-xs text-charcoal/50 font-medium">Starting form</span>
+                      <span class="text-xl font-bold text-navy">
+                        ${room.price} <span class="text-sm font-normal text-charcoal/60">/ night</span>
+                      </span>
+                    </div>
+                    
+                    <a 
+                      href={`/rooms/${room.id}`} 
+                      class="px-4 py-2 bg-gold text-white text-sm font-semibold rounded hover:bg-opacity-90 transition-all duration-200 hover:scale-105 shadow-sm"
+                    >
+                      View Room →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+        
+        {/* Bottom CTA */}
+        <div class="text-center mt-16 pt-10 border-t border-sand/30">
+          <h3 class="font-heading text-2xl text-navy font-bold mb-3">Need help choosing?</h3>
+          <p class="text-charcoal/80 mb-6">Our concierge team is happy to ensure you find the perfect stay.</p>
+          <a 
+            href="tel:+19545550123" 
+            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gold hover:bg-opacity-90 transition-all duration-300 shadow-sm"
+          >
+            Contact Concierge
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-up-1 {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .animate-fade-up-2 {
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+</style>

@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ImageGallery from '../../components/rooms/ImageGallery';
+import { rooms } from '../../data/rooms';
+
+export function getStaticPaths() {
+  return rooms.map(room => ({
+    params: { slug: room.slug },
+    props: { room },
+  }));
+}
+
+const { room } = Astro.props;
+const { slug } = Astro.params;
+
+// Fallback if accessed via dynamic route during dev without getStaticPaths fully hydrating (mostly for safety)
+const currentRoom = room || rooms.find(r => r.slug === slug);
+
+if (!currentRoom) {
+  return Astro.redirect('/404');
+}
+
+const similarRooms = rooms
+  .filter(r => r.id !== currentRoom.id)
+  .slice(0, 3);
+---
+
+<BaseLayout 
+  title={`${currentRoom.name} | Rooms & Suites | Lighthouse Point Hotel`} 
+  description={currentRoom.description}
+>
+  <Header />
+
+  <main class="pt-24 lg:pt-32 pb-16">
+    
+    <!-- GALLERY SECTION -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <nav class="flex text-sm font-medium text-charcoal/60 mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2">
+          <li><a href="/" class="hover:text-navy transition-colors">Home</a></li>
+          <li><span>&gt;</span></li>
+          <li><a href="/rooms" class="hover:text-navy transition-colors">Rooms</a></li>
+          <li><span>&gt;</span></li>
+          <li class="text-navy" aria-current="page">{currentRoom.name}</li>
+        </ol>
+      </nav>
+
+      <ImageGallery client:load images={currentRoom.images} />
+    </div>
+
+    <!-- ROOM INFO & BOOKING -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-12 relative">
+        
+        <!-- LEFT COLUMN: Content (60%) -->
+        <div class="w-full lg:w-[60%]">
+          <div class="flex items-start justify-between mb-4">
+            <h1 class="font-heading text-4xl lg:text-5xl text-navy font-bold">{currentRoom.name}</h1>
+            {currentRoom.badge && (
+               <span class="bg-gold/10 text-gold text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-gold/20 mt-2">
+                 {currentRoom.badge}
+               </span>
+            )}
+          </div>
+
+          <div class="flex items-center gap-2 mb-6 text-sm">
+            <div class="flex text-gold">
+              {'★★★★★'.split('').map(s => <span>{s}</span>)}
+            </div>
+            <span class="text-charcoal font-bold">4.9/5</span>
+            <span class="text-charcoal/60 underline cursor-pointer hover:text-navy transition-colors">(127 reviews)</span>
+          </div>
+
+          <p class="text-ocean text-lg italic mb-8 font-light border-l-4 border-gold pl-4">
+            "Wake up to the Atlantic every morning"
+          </p>
+
+          <div class="h-px bg-sand/30 w-full mb-8"></div>
+
+          <div class="mb-8">
+            <h2 class="font-heading text-2xl text-navy font-bold mb-4">About This Room</h2>
+            <div class="prose prose-slate text-charcoal/80 leading-relaxed whitespace-pre-line">
+              {currentRoom.longDescription}
+            </div>
+          </div>
+
+          <div class="h-px bg-sand/30 w-full mb-8"></div>
+
+          <div class="mb-10">
+            <h2 class="font-heading text-2xl text-navy font-bold mb-6">Room Amenities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-2">
+              {currentRoom.amenities.map(amenity => (
+                <div class="flex items-center gap-3 text-sm text-charcoal">
+                  <span class="text-ocean bg-ocean/10 p-1 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">✓</span>
+                  {amenity}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="h-px bg-sand/30 w-full mb-8"></div>
+
+          <div class="bg-sand/10 rounded-lg p-6 mb-8">
+            <h2 class="font-heading text-lg text-navy font-bold mb-4">Room Details</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-sm">
+              <div>
+                <span class="block text-charcoal/50 text-xs uppercase tracking-wider mb-1">Size</span>
+                <span class="font-medium text-navy">{currentRoom.size}</span>
+              </div>
+              <div>
+                <span class="block text-charcoal/50 text-xs uppercase tracking-wider mb-1">Bed</span>
+                <span class="font-medium text-navy">{currentRoom.bed}</span>
+              </div>
+              <div>
+                <span class="block text-charcoal/50 text-xs uppercase tracking-wider mb-1">View</span>
+                <span class="font-medium text-navy">{currentRoom.view}</span>
+              </div>
+              <div>
+                <span class="block text-charcoal/50 text-xs uppercase tracking-wider mb-1">Max Guests</span>
+                <span class="font-medium text-navy">{currentRoom.details.maxGuests} Adults</span>
+              </div>
+              <div>
+                <span class="block text-charcoal/50 text-xs uppercase tracking-wider mb-1">Floor</span>
+                <span class="font-medium text-navy">{currentRoom.details.floor} Floors</span>
+              </div>
+              <div>
+                <span class="block text-charcoal/50 text-xs uppercase tracking-wider mb-1">Check-in</span>
+                <span class="font-medium text-navy">{currentRoom.details.checkIn}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Sticky Booking Card (40%) -->
+        <div class="w-full lg:w-[40%] relative">
+          <div class="sticky top-28 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-sand/20 p-6 overflow-hidden">
+            <div class="flex items-end gap-2 mb-1">
+              <span class="text-sm text-charcoal/60 font-medium mb-1.5">From</span>
+              <span class="text-3xl font-heading font-bold text-navy">${currentRoom.price}</span>
+              <span class="text-sm text-charcoal/60 mb-1.5">/ night</span>
+            </div>
+            <p class="text-xs text-green-600 mb-6 flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+              Best Price Guarantee
+            </p>
+
+            <!-- Booking Form Mockup -->
+            <div class="space-y-4 mb-6">
+              <div class="grid grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-bold text-navy uppercase tracking-wider">Check-in</label>
+                  <input type="date" class="w-full border border-sand rounded p-2 text-sm text-charcoal focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold" />
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-bold text-navy uppercase tracking-wider">Check-out</label>
+                  <input type="date" class="w-full border border-sand rounded p-2 text-sm text-charcoal focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold" />
+                </div>
+              </div>
+              
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-bold text-navy uppercase tracking-wider">Guests</label>
+                <select class="w-full border border-sand rounded p-2 text-sm text-charcoal focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold appearance-none bg-white">
+                  <option>2 Adults</option>
+                  <option>1 Adult</option>
+                  <option>2 Adults, 1 Child</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Price Breakdown Mockup -->
+            <div class="bg-sand/10 rounded-lg p-4 mb-6 space-y-2 text-sm">
+              <div class="flex justify-between text-charcoal/80">
+                <span>${currentRoom.price} x 3 nights</span>
+                <span>${currentRoom.price * 3}</span>
+              </div>
+              <div class="flex justify-between text-charcoal/80">
+                <span>Taxes & fees</span>
+                <span>$152</span>
+              </div>
+              <div class="h-px bg-sand/20 w-full my-2"></div>
+              <div class="flex justify-between font-bold text-navy text-base">
+                <span>Total</span>
+                <span>${currentRoom.price * 3 + 152}</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <button class="w-full btn-primary py-3.5 text-base shadow-lg shadow-gold/20 mb-3">
+              Book This Room
+            </button>
+            <div class="text-center">
+              <span class="text-xs text-charcoal/50">or call </span>
+              <a href="tel:+19545550123" class="text-xs font-medium text-navy hover:text-gold transition-colors">(954) 555-0123</a>
+            </div>
+            
+            <div class="mt-4 pt-4 border-t border-sand/20 flex justify-center gap-4 text-[10px] text-charcoal/50 uppercase tracking-widest font-medium text-center">
+              <span>Free Cancellation</span>
+              <span>•</span>
+              <span>Instant Confirmation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- SIMILAR ROOMS -->
+  <section class="bg-sand/20 py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="font-heading text-2xl text-navy font-bold mb-8 text-center md:text-left">You Might Also Like</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {similarRooms.map(room => (
+          <a href={`/rooms/${room.slug}`} class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 block">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img src={room.images[0]} alt={room.name} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h4 class="font-heading text-xl text-navy font-bold mb-1 group-hover:text-gold transition-colors">{room.name}</h4>
+              <p class="text-charcoal/60 text-sm mb-4">{room.view} • {room.bed}</p>
+              <div class="flex justify-between items-center bg-sand/10 p-3 rounded">
+                 <span class="text-navy font-bold text-sm">From ${room.price}</span>
+                 <span class="text-xs text-charcoal/50 uppercase font-medium tracking-wider">View Details</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

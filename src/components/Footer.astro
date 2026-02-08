@@ -1,0 +1,201 @@
+---
+import LighthouseIcon from './LighthouseIcon.astro';
+import Instagram from './icons/Instagram.astro';
+import Facebook from './icons/Facebook.astro';
+import Twitter from './icons/Twitter.astro';
+import TripAdvisor from './icons/TripAdvisor.astro';
+
+interface QuickLink {
+  label: string;
+  href: string;
+}
+
+const quickLinks: QuickLink[] = [
+  { label: 'Rooms & Suites', href: '/rooms' },
+  { label: 'Dining', href: '/dining' },
+  { label: 'Experiences', href: '/experiences' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Special Offers', href: '/offers' },
+  { label: 'FAQ', href: '/faq' },
+];
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
+  { label: 'Sitemap', href: '/sitemap' },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-navy text-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    {/* Main Footer Grid - 4 columns on desktop, 2 on tablet, 1 on mobile */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      
+      {/* Column 1 - Brand */}
+      <div class="lg:col-span-1">
+        <a href="/" class="flex items-center gap-3 mb-4 group">
+          <LighthouseIcon class="w-10 h-10 text-white transition-colors group-hover:text-gold" />
+          <span class="font-heading text-xl font-bold text-white">
+            Lighthouse Point Hotel
+          </span>
+        </a>
+        <p class="text-gold font-heading text-sm mb-4 italic">
+          Where the ocean meets elegance
+        </p>
+        <p class="text-sand/90 text-sm leading-relaxed">
+          Perched on the scenic coastline, Lighthouse Point Hotel offers an unforgettable escape 
+          with breathtaking ocean views and world-class hospitality.
+        </p>
+      </div>
+
+      {/* Column 2 - Quick Links */}
+      <div class="lg:col-span-1">
+        <h3 class="text-gold font-heading text-lg font-bold mb-4">Explore</h3>
+        <nav>
+          <ul class="space-y-3">
+            {quickLinks.map((link) => (
+              <li>
+                <a 
+                  href={link.href}
+                  class="text-sand/90 text-sm hover:text-white transition-colors duration-200 relative inline-block group"
+                >
+                  {link.label}
+                  <span class="absolute bottom-0 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* Column 3 - Contact Info */}
+      <div class="lg:col-span-1">
+        <h3 class="text-gold font-heading text-lg font-bold mb-4">Get In Touch</h3>
+        <div class="space-y-3 text-sm">
+          <p class="text-sand/90 leading-relaxed">
+            123 Coastal Drive<br />
+            Lighthouse Point, FL 33064
+          </p>
+          <p>
+            <a 
+              href="tel:+19545550123" 
+              class="text-sand/90 hover:text-gold transition-colors duration-200"
+            >
+              (954) 555-0123
+            </a>
+          </p>
+          <p>
+            <a 
+              href="mailto:hello@lighthousepointhotel.com" 
+              class="text-sand/90 hover:text-gold transition-colors duration-200"
+            >
+              hello@lighthousepointhotel.com
+            </a>
+          </p>
+          <p class="text-sand/90 pt-2">
+            <span class="text-white font-semibold">Front Desk:</span> 24/7
+          </p>
+        </div>
+      </div>
+
+      {/* Column 4 - Stay Connected */}
+      <div class="lg:col-span-1">
+        <h3 class="text-gold font-heading text-lg font-bold mb-4">Follow Us</h3>
+        
+        {/* Social Media Icons */}
+        <div class="flex gap-4 mb-6">
+          <a 
+            href="https://instagram.com/lighthousepointhotel" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white hover:text-gold transition-colors duration-200"
+            aria-label="Follow us on Instagram"
+          >
+            <Instagram class="w-6 h-6" />
+          </a>
+          <a 
+            href="https://facebook.com/lighthousepointhotel" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white hover:text-gold transition-colors duration-200"
+            aria-label="Follow us on Facebook"
+          >
+            <Facebook class="w-6 h-6" />
+          </a>
+          <a 
+            href="https://twitter.com/lighthousept" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white hover:text-gold transition-colors duration-200"
+            aria-label="Follow us on Twitter"
+          >
+            <Twitter class="w-6 h-6" />
+          </a>
+          <a 
+            href="https://tripadvisor.com/hotel/lighthousepoint" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white hover:text-gold transition-colors duration-200"
+            aria-label="Review us on TripAdvisor"
+          >
+            <TripAdvisor class="w-6 h-6" />
+          </a>
+        </div>
+
+        {/* Newsletter Signup */}
+        <div>
+          <p class="text-sand/90 text-sm mb-3">Subscribe for exclusive offers</p>
+          <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+            <input 
+              type="email" 
+              placeholder="Your email"
+              required
+              class="flex-1 px-3 py-2 text-sm bg-white/10 border border-white/20 rounded text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent"
+            />
+            <button 
+              type="submit"
+              class="px-4 py-2 bg-gold text-navy text-sm font-semibold rounded hover:bg-opacity-90 transition-all duration-200 hover:scale-105"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom Bar */}
+  <div class="border-t border-gold/30">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-sand/70">
+        <p>
+          &copy; {currentYear} Lighthouse Point Hotel. All rights reserved.
+        </p>
+        <nav class="flex gap-6">
+          {legalLinks.map((link, index) => (
+            <>
+              <a 
+                href={link.href}
+                class="hover:text-gold transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+              {index < legalLinks.length - 1 && (
+                <span class="text-sand/40">|</span>
+              )}
+            </>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Ensure hover underline animation starts from left */
+  footer a span {
+    transform-origin: left;
+  }
+</style>

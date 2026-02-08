@@ -1,0 +1,288 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const heroImage = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0";
+const beaconImage = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4";
+const loungeImage = "https://images.unsplash.com/photo-1470337458703-46ad1756a187";
+---
+
+<BaseLayout 
+  title="Dining | Lighthouse Point Hotel" 
+  description="Experience world-class dining at Lighthouse Point Hotel. From The Beacon's farm-to-table cuisine to sunset cocktails at The Lantern Lounge."
+>
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <div 
+        class="absolute inset-0 bg-cover bg-center z-0"
+        style={`background-image: url('${heroImage}');`}
+      >
+      </div>
+      <div class="absolute inset-0 bg-navy/60 z-10"></div>
+      
+      <div class="relative z-20 container mx-auto px-4 text-center text-white">
+        <span class="block text-gold font-body uppercase tracking-[0.2em] text-sm font-semibold mb-4 animate-fade-up-1">
+          Culinary Experiences
+        </span>
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-up-2">
+          Dining at Lighthouse Point
+        </h1>
+        <p class="text-sand text-lg md:text-xl font-light max-w-2xl mx-auto animate-fade-up-3">
+          From ocean to table — taste the coast
+        </p>
+      </div>
+    </section>
+
+    <!-- THE BEACON RESTAURANT -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          <!-- Image Column (Left) -->
+          <div class="w-full lg:w-1/2">
+            <div class="relative rounded-lg overflow-hidden shadow-xl aspect-[4/3] group">
+              <img 
+                src={beaconImage} 
+                alt="The Beacon Restaurant Interior" 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          </div>
+
+          <!-- Text Column (Right) -->
+          <div class="w-full lg:w-1/2">
+            <span class="block text-gold font-body uppercase tracking-[0.15em] text-xs font-bold mb-2">
+              Signature Restaurant
+            </span>
+            <h2 class="font-heading text-4xl lg:text-5xl text-navy font-bold mb-6">
+              The Beacon
+            </h2>
+            <div class="text-charcoal/80 leading-relaxed mb-8 space-y-4">
+              <p>
+                Experience culinary excellence at The Beacon, where our Michelin-starred chef transforms locally sourced ingredients into coastal masterpieces. Our farm-to-table philosophy ensures that every dish celebrates the freshest seasonal produce and the bounty of the Atlantic.
+              </p>
+              <p>
+                Set against the backdrop of panoramic ocean views, The Beacon offers an elegant yet inviting atmosphere perfect for romantic dinners, family celebrations, or a sophisticated breakfast to start your day.
+              </p>
+            </div>
+
+            <!-- Info Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 mb-8 text-sm">
+              <div class="flex items-start gap-3">
+                <span class="text-xl">🕐</span>
+                <div>
+                  <span class="block font-bold text-navy">Breakfast</span>
+                  <span class="text-charcoal/70">7:00 AM - 10:30 AM</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-xl">🕐</span>
+                <div>
+                  <span class="block font-bold text-navy">Lunch</span>
+                  <span class="text-charcoal/70">12:00 PM - 3:00 PM</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-xl">🕐</span>
+                <div>
+                  <span class="block font-bold text-navy">Dinner</span>
+                  <span class="text-charcoal/70">6:00 PM - 10:00 PM</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-xl">👔</span>
+                <div>
+                  <span class="block font-bold text-navy">Dress Code</span>
+                  <span class="text-charcoal/70">Smart Casual</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-wrap gap-4">
+              <a href="#" class="btn-primary">View Menu</a>
+              <a href="#reservations" class="px-6 py-3 border border-navy text-navy font-semibold rounded hover:bg-navy hover:text-white transition-all duration-300">
+                Reserve a Table
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- THE LANTERN LOUNGE -->
+    <section class="py-24 bg-sand/20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+          
+          <!-- Text Column (Left) -->
+          <div class="w-full lg:w-1/2">
+            <span class="block text-navy/60 font-body uppercase tracking-[0.15em] text-xs font-bold mb-2">
+              Cocktails & More
+            </span>
+            <h2 class="font-heading text-4xl lg:text-5xl text-navy font-bold mb-6">
+              The Lantern Lounge
+            </h2>
+            <div class="text-charcoal/80 leading-relaxed mb-8 space-y-4">
+              <p>
+                Unwind in style at The Lantern Lounge, the heartbeat of Lighthouse Point's social scene. Expert mixologists craft ocean-inspired cocktails using premium spirits and house-made infusions, served alongside a curated selection of fine wines and artisanal small plates.
+              </p>
+              <p>
+                As the sun dips below the horizon, the atmosphere transforms with live acoustic music on weekends and our signature sunset happy hour, making it the perfect spot to toast to another day in paradise.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-4 mb-8 text-sm">
+               <span class="text-xl">🕐</span>
+               <div>
+                  <span class="block font-bold text-navy">Hours</span>
+                  <span class="text-charcoal/70">4:00 PM - Midnight daily</span>
+               </div>
+            </div>
+
+            <a href="#" class="btn-primary">View Cocktail Menu</a>
+          </div>
+
+          <!-- Image Column (Right) -->
+          <div class="w-full lg:w-1/2">
+            <div class="relative rounded-lg overflow-hidden shadow-xl aspect-[4/3] group">
+              <img 
+                src={loungeImage} 
+                alt="The Lantern Lounge Atmosphere" 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIAL DINING EXPERIENCES -->
+    <section class="py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="block text-gold font-body uppercase tracking-[0.15em] text-xs font-bold mb-3">
+          Unforgettable Moments
+        </span>
+        <h2 class="font-heading text-3xl md:text-4xl text-navy font-bold mb-12">
+          Private Dining & Events
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+          
+          <!-- Card 1 -->
+          <div class="group bg-white rounded-xl shadow-lg overflow-hidden hover:-translate-y-2 transition-transform duration-300">
+            <div class="relative h-64 overflow-hidden">
+               <img 
+                src="https://images.unsplash.com/photo-1519225421980-715cb0202128" 
+                alt="Private Beach Dinner" 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+               />
+               <div class="absolute inset-0 bg-navy/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-8">
+              <h3 class="font-heading text-2xl text-navy font-bold mb-3">Private Beach Dinner</h3>
+              <p class="text-charcoal/70 mb-6 leading-relaxed">
+                An intimate dining experience set directly on the sand under a canopy of stars. Enjoy a personalized menu and dedicated service with the ocean as your soundtrack.
+              </p>
+              <span class="block text-gold font-bold font-heading text-lg">From $350 per couple</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group bg-white rounded-xl shadow-lg overflow-hidden hover:-translate-y-2 transition-transform duration-300">
+            <div class="relative h-64 overflow-hidden">
+               <img 
+                src="https://images.unsplash.com/photo-1559339352-11d035aa65de" 
+                alt="Chef's Table Experience" 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+               />
+               <div class="absolute inset-0 bg-navy/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-8">
+              <h3 class="font-heading text-2xl text-navy font-bold mb-3">Chef's Table Experience</h3>
+              <p class="text-charcoal/70 mb-6 leading-relaxed">
+                Go behind the scenes for an exclusive culinary journey. Our Executive Chef guides you through a 7-course tasting menu with perfectly paired wines aimed to delight.
+              </p>
+              <span class="block text-gold font-bold font-heading text-lg">From $195 per person</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group bg-white rounded-xl shadow-lg overflow-hidden hover:-translate-y-2 transition-transform duration-300">
+            <div class="relative h-64 overflow-hidden">
+               <img 
+                src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57" 
+                alt="Sunset Terrace Events" 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+               />
+               <div class="absolute inset-0 bg-navy/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="p-8">
+              <h3 class="font-heading text-2xl text-navy font-bold mb-3">Sunset Terrace Events</h3>
+              <p class="text-charcoal/70 mb-6 leading-relaxed">
+                Celebrate life's special moments on our private sunset terrace. Perfect for intimate weddings, anniversaries, or family gatherings of up to 40 guests.
+              </p>
+              <span class="block text-gold font-bold font-heading text-lg">Contact for pricing</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESERVATION CTA -->
+    <section id="reservations" class="py-16 bg-navy text-center">
+      <div class="container mx-auto px-4">
+        <h2 class="font-heading text-3xl md:text-4xl text-white font-bold mb-4">
+          Reserve Your Table
+        </h2>
+        <p class="text-sand text-lg mb-8 max-w-2xl mx-auto">
+          Book your dining experience today and prepare for a culinary journey you won't soon forget.
+        </p>
+        <a href="#" class="btn-primary inline-flex items-center justify-center min-w-[200px]">
+          Make a Reservation
+        </a>
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-up-1 {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .animate-fade-up-2 {
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  .animate-fade-up-3 {
+    animation: fadeUp 0.8s ease-out forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+</style>

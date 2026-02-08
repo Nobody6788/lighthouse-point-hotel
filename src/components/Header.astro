@@ -1,0 +1,107 @@
+---
+import LighthouseIcon from './LighthouseIcon.astro';
+import MobileNav from './MobileNav';
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+const navLinks: NavLink[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Rooms', href: '/rooms' },
+  { label: 'Dining', href: '/dining' },
+  { label: 'Experiences', href: '/experiences' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header 
+  id="main-header" 
+  class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm transition-all duration-300"
+>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      {/* Logo - Desktop */}
+      <a href="/" class="flex items-center gap-3 group">
+        <LighthouseIcon class="w-8 h-8 text-navy transition-colors group-hover:text-ocean" />
+        <span class="hidden lg:block font-heading text-xl text-navy font-bold">
+          Lighthouse Point Hotel
+        </span>
+        {/* Logo - Mobile (shorter) */}
+        <span class="lg:hidden font-heading text-xl text-navy font-bold">
+          LPH
+        </span>
+      </a>
+
+      {/* Desktop Navigation */}
+      <nav class="hidden lg:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={`text-sm font-medium transition-colors duration-200 hover:text-ocean relative ${
+              currentPath === link.href 
+                ? 'text-navy after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-gold' 
+                : 'text-charcoal'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      {/* Desktop Book Now Button */}
+      <a href="/book" class="hidden lg:block btn-primary">
+        Book Now
+      </a>
+
+      {/* Mobile Navigation (Preact Island) */}
+      <MobileNav client:load links={navLinks} currentPath={currentPath} />
+    </div>
+  </div>
+</header>
+
+{/* Spacer to prevent content from hiding under fixed header */}
+<div class="h-20" aria-hidden="true"></div>
+
+<script>
+  // Scroll behavior for header
+  let lastScroll = 0;
+  const header = document.getElementById('main-header');
+
+  if (header) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 50) {
+        // Add more visible shadow and backdrop blur after scrolling 50px
+        header.classList.add('shadow-md', 'bg-white/95', 'backdrop-blur-sm');
+        header.classList.remove('shadow-sm', 'bg-white');
+      } else {
+        // Return to original state
+        header.classList.remove('shadow-md', 'bg-white/95', 'backdrop-blur-sm');
+        header.classList.add('shadow-sm', 'bg-white');
+      }
+
+      lastScroll = currentScroll;
+    });
+  }
+</script>
+
+<style>
+  /* Ensure active link underline is properly positioned */
+  nav a {
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  /* Smooth transitions for all header changes */
+  #main-header {
+    will-change: transform, box-shadow, background-color;
+  }
+</style>

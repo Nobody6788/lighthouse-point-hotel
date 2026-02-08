@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookingForm from '../components/booking/BookingForm';
+---
+
+<BaseLayout 
+  title="Book Your Stay | Lighthouse Point Hotel" 
+  description="Book your stay at Lighthouse Point Hotel. Select your dates, choose your room, and begin your coastal escape."
+>
+  <Header />
+
+  <main class="bg-white py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-heading text-3xl md:text-4xl text-navy font-bold mb-3">
+          Book Your Stay
+        </h1>
+        <p class="text-charcoal/70 text-lg">
+          Select your dates and preferred room to begin
+        </p>
+      </div>
+
+      <!-- Booking Form Component -->
+      <BookingForm client:load />
+
+      <!-- Trust & Info Section -->
+      <div class="mt-16 pt-12 border-t border-sand/30">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-center">
+          <div class="flex flex-col items-center">
+            <svg class="w-12 h-12 text-gold mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="font-heading text-lg text-navy font-bold mb-1">Free Cancellation</h3>
+            <p class="text-sm text-charcoal/60">Up to 48 hours before check-in</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg class="w-12 h-12 text-gold mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="font-heading text-lg text-navy font-bold mb-1">Best Rate Guarantee</h3>
+            <p class="text-sm text-charcoal/60">Lowest prices, guaranteed</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg class="w-12 h-12 text-gold mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+            <h3 class="font-heading text-lg text-navy font-bold mb-1">No Payment Now</h3>
+            <p class="text-sm text-charcoal/60">Credit card not required to inquire</p>
+          </div>
+        </div>
+
+        <div class="text-center bg-sand/10 rounded-lg p-8">
+          <h3 class="font-heading text-xl text-navy font-bold mb-3">Prefer to Book by Phone?</h3>
+          <p class="text-charcoal/70 mb-4">
+            Call our reservations team: <a href="tel:+19545550124" class="text-ocean hover:text-gold transition-colors font-semibold">(954) 555-0124</a>
+          </p>
+          <p class="text-sm text-charcoal/60">
+            Available 8:00 AM - 8:00 PM EST, 7 days a week
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 1; transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+  
+  :global(.animate-bounce-in) {
+    animation: bounceIn 0.6s ease-out forwards;
+  }
+</style>

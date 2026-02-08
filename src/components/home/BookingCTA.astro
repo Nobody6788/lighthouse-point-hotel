@@ -1,0 +1,39 @@
+---
+const background = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e";
+---
+
+<section class="relative py-24 flex items-center justify-center overflow-hidden">
+  {/* Parallax Background */}
+  <div 
+    class="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat z-0"
+    style={`background-image: url('${background}');`}
+  >
+  </div>
+
+  {/* Dark Overlay */}
+  <div class="absolute inset-0 bg-navy/60 z-10"></div>
+
+  {/* Content */}
+  <div class="relative z-20 container mx-auto px-4 text-center">
+    <h2 class="font-heading text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+      Begin Your Coastal Escape
+    </h2>
+    
+    <p class="text-sand text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-200">
+      Unforgettable views. Unparalleled luxury. Your perfect stay awaits.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-400">
+      <a href="/book" class="btn-primary min-w-[200px] text-center">
+        Check Availability
+      </a>
+      
+      <a 
+        href="tel:+19545550123" 
+        class="px-8 py-3 rounded border border-white text-white font-semibold transition-all duration-300 hover:bg-white hover:text-navy hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 min-w-[200px] text-center"
+      >
+        Call Us: (954) 555-0123
+      </a>
+    </div>
+  </div>
+</section>

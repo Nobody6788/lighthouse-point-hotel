@@ -1,0 +1,28 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'w-6 h-6' } = Astro.props;
+---
+
+<!-- TripAdvisor (Owl) -->
+<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  stroke="currentColor" 
+  stroke-width="2" 
+  stroke-linecap="round" 
+  stroke-linejoin="round"
+  class={className}
+>
+  <!-- Simplified owl representation -->
+  <circle cx="8" cy="12" r="4" />
+  <circle cx="16" cy="12" r="4" />
+  <circle cx="8" cy="12" r="1.5" fill="currentColor" />
+  <circle cx="16" cy="12" r="1.5" fill="currentColor" />
+  <path d="M12 8v-4" />
+  <path d="M4 12l-2 -2" />
+  <path d="M20 12l2 -2" />
+</svg>

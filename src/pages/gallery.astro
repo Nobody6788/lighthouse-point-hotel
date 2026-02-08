@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import GalleryGrid from '../components/gallery/GalleryGrid';
+
+const galleryImages = [
+  // Rooms
+  { src: "https://images.unsplash.com/photo-1611892440504-42a792e24d32", category: "Rooms", alt: "Ocean View Suite Interior", aspect: "aspect-[4/3]" },
+  { src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b", category: "Rooms", alt: "Bedroom Detail", aspect: "aspect-[3/4]" },
+  { src: "https://images.unsplash.com/photo-1590490360182-c33d57733427", category: "Rooms", alt: "Luxury Bathroom", aspect: "aspect-square" },
+  
+  // Dining
+  { src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4", category: "Dining", alt: "The Beacon Interior", aspect: "aspect-[4/3]" },
+  { src: "https://images.unsplash.com/photo-1514362545857-3bc16549766b", category: "Dining", alt: "Gourmet Plating", aspect: "aspect-square" },
+  { src: "https://images.unsplash.com/photo-1559339352-11d035aa65de", category: "Dining", alt: "Cocktail at Lantern Lounge", aspect: "aspect-[3/4]" },
+  
+  // Spa
+  { src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef", category: "Spa", alt: "Spa Massage Room", aspect: "aspect-[4/3]" },
+  { src: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881", category: "Spa", alt: "Relaxation Area", aspect: "aspect-square" },
+  
+  // Beach
+  { src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", category: "Beach", alt: "Pristine Beach", aspect: "aspect-[16/9]" },
+  { src: "https://images.unsplash.com/photo-1519225421980-715cb0202128", category: "Beach", alt: "Beachfront Setup", aspect: "aspect-[3/4]" },
+  
+  // Events
+  { src: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622", category: "Events", alt: "Wedding Setup", aspect: "aspect-[4/3]" },
+  { src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b", category: "Events", alt: "Gala Dinner", aspect: "aspect-[3/4]" },
+  
+  // Aerial
+  { src: "https://images.unsplash.com/photo-1566073771259-6a8506099945", category: "Aerial", alt: "Resort Aerial View", aspect: "aspect-[4/3]" }, 
+  { src: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9", category: "Aerial", alt: "Pool Aerial", aspect: "aspect-[3/4]" },
+  { src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4", category: "Aerial", alt: "Coastline Drone Shot", aspect: "aspect-[16/9]" }
+];
+---
+
+<BaseLayout 
+  title="Gallery | Lighthouse Point Hotel" 
+  description="Explore the visual journey of Lighthouse Point Hotel. View photos of our rooms, dining, spa, beach, and stunning aerial views."
+>
+  <Header />
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="h-[40vh] min-h-[300px] flex items-center justify-center bg-gradient-to-br from-navy via-[#1B2A4A] to-charcoal text-center px-4 relative overflow-hidden">
+      <!-- Subtle Pattern Overlay -->
+      <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+      
+      <div class="relative z-10 animate-fade-in">
+        <span class="block text-gold font-body uppercase tracking-[0.2em] text-sm font-semibold mb-4">
+          Visual Journey
+        </span>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
+          Our Gallery
+        </h1>
+        <p class="text-sand text-lg font-light max-w-2xl mx-auto">
+          Explore Lighthouse Point Hotel through our lens
+        </p>
+      </div>
+    </section>
+
+    <!-- GALLERY GRID with Filters -->
+    <section class="py-12 bg-sand/20 min-h-screen">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <GalleryGrid client:visible images={galleryImages} />
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+</style>

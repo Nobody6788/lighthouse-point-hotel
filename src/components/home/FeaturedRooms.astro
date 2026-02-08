@@ -1,0 +1,113 @@
+---
+const rooms = [
+  {
+    name: "Ocean View Suite",
+    description: "Wake up to panoramic Atlantic views from your private balcony. Elegantly appointed with coastal-inspired décor.",
+    image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32",
+    price: "389",
+    amenities: ["2 Guests", "King Bed", "520 sq ft", "Ocean View"],
+    link: "/rooms/ocean-view-suite"
+  },
+  {
+    name: "Harbor View Room",
+    description: "Overlooking the charming harbor, this room offers a cozy retreat with nautical touches and warm hospitality.",
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+    price: "259",
+    amenities: ["2 Guests", "Queen Bed", "380 sq ft", "Harbor View"],
+    link: "/rooms/harbor-view-room"
+  },
+  {
+    name: "Lighthouse Penthouse",
+    description: "Our crown jewel — a two-story penthouse with 360° views, private terrace, and butler service.",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304",
+    price: "899",
+    amenities: ["4 Guests", "2 King Beds", "1200 sq ft", "Panoramic"],
+    link: "/rooms/lighthouse-penthouse"
+  }
+];
+---
+
+<section id="featured-rooms" class="py-24 bg-sand">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header */}
+    <div class="text-center mb-16 animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+      <span class="block text-ocean font-body uppercase tracking-[0.2em] text-sm font-semibold mb-4">
+        Accommodations
+      </span>
+      <h2 class="font-heading text-navy text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        Curated Comfort, Ocean Views
+      </h2>
+      <p class="text-charcoal text-lg max-w-2xl mx-auto leading-relaxed font-light">
+        Each room is a sanctuary designed with your comfort in mind, 
+        blending luxury amenities with the serene beauty of the coast.
+      </p>
+    </div>
+
+    {/* Rooms Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-16 px-4 sm:px-0">
+      {rooms.map((room, index) => (
+        <a 
+          href={room.link}
+          class={`group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full animate-on-scroll opacity-0 translate-y-8`}
+          style={`transition-delay: ${index * 150}ms`}
+        >
+          {/* Image Container */}
+          <div class="relative aspect-[16/9] overflow-hidden">
+            <img 
+              src={room.image} 
+              alt={room.name} 
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Price Badge */}
+            <div class="absolute top-4 right-4 bg-gold text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm z-10">
+              From ${room.price}/night
+            </div>
+            {/* Overlay on hover */}
+            <div class="absolute inset-0 bg-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+
+          {/* Content */}
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-heading text-xl text-navy font-bold mb-3 group-hover:text-ocean transition-colors duration-300">
+              {room.name}
+            </h3>
+            <p class="text-charcoal/80 text-sm leading-relaxed mb-6 line-clamp-2 flex-grow">
+              {room.description}
+            </p>
+
+            {/* Amenities */}
+            <div class="flex flex-wrap gap-y-2 gap-x-4 mb-6 text-xs text-charcoal/70 font-medium">
+              {room.amenities.map((amenity, i) => (
+                <span class="flex items-center gap-1">
+                  {i === 0 && '👥'}
+                  {i === 1 && '🛏️'}
+                  {i === 2 && '📐'}
+                  {i === 3 && (amenity.includes('Ocean') ? '🌊' : amenity.includes('Harbor') ? '⛵' : '🌅')}
+                  {amenity}
+                </span>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div class="h-px w-full bg-sand mb-4"></div>
+
+            {/* Link */}
+            <div class="flex items-center justify-between mt-auto">
+              <span class="text-ocean text-sm font-semibold group-hover:text-gold transition-colors duration-300 flex items-center gap-2">
+                View Details 
+                <span class="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {/* View All Button */}
+    <div class="text-center animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-500">
+      <a href="/rooms" class="btn-primary inline-flex items-center gap-2">
+        View All Rooms
+      </a>
+    </div>
+  </div>
+</section>

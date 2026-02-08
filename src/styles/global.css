@@ -1,0 +1,48 @@
+/* Import Self-Hosted Fonts from Fontsource */
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Styles */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        font-family: 'Inter', sans-serif;
+    }
+
+    body {
+        @apply bg-sand text-charcoal;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-heading;
+    }
+}
+
+/* Component Styles */
+@layer components {
+
+    /* Primary Button */
+    .btn-primary {
+        @apply bg-gold text-navy font-semibold px-6 py-3 rounded transition-all duration-300;
+        @apply hover:bg-opacity-80 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+    }
+
+    /* Secondary Button */
+    .btn-secondary {
+        @apply bg-transparent border-2 border-navy text-navy font-semibold px-6 py-3 rounded transition-all duration-300;
+        @apply hover:bg-navy hover:text-white hover:scale-105 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2;
+    }
+}
