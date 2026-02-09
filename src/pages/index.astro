@@ -84,6 +84,25 @@ const heroImage = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
   </main>
 
   <Footer />
+  
+  <!-- Netlify Identity Redirect Handler -->
+  <script>
+    // Check if user just logged in via Netlify Identity and redirect to admin
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('login', () => {
+        // User just logged in, redirect to admin
+        window.location.href = '/admin/';
+      });
+      
+      // Also check on page load if user came from email confirmation
+      window.netlifyIdentity.on('init', user => {
+        // Check if there's a hash indicating we came from email confirmation
+        if (user && window.location.hash.includes('confirmation_token')) {
+          window.location.href = '/admin/';
+        }
+      });
+    }
+  </script>
 </BaseLayout>
 
 <style>
