@@ -86,20 +86,20 @@ const heroImage = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
   <Footer />
   
   <!-- Netlify Identity Redirect Handler -->
-  <script>
-    // Check if user just logged in via Netlify Identity and redirect to admin
+  <script is:inline>
+    // Wait for Netlify Identity widget to load
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('login', () => {
-        // User just logged in, redirect to admin
-        window.location.href = '/admin/';
-      });
+      // Check if there's a confirmation token in the URL
+      const hash = window.location.hash;
       
-      // Also check on page load if user came from email confirmation
-      window.netlifyIdentity.on('init', user => {
-        // Check if there's a hash indicating we came from email confirmation
-        if (user && window.location.hash.includes('confirmation_token')) {
-          window.location.href = '/admin/';
-        }
+      if (hash && (hash.includes('confirmation_token') || hash.includes('invite_token') || hash.includes('recovery_token'))) {
+        // Force the widget to open and process the token
+        window.netlifyIdentity.open();
+      }
+      
+      // Redirect to admin after successful login
+      window.netlifyIdentity.on('login', () => {
+        window.location.href = '/admin/';
       });
     }
   </script>
