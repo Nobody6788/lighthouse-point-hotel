@@ -53,6 +53,11 @@ const {
             });
           }
         });
+        
+        // Handle redirect after accepting invitation
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
       }
     </script>
   </body>
