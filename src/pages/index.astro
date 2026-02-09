@@ -87,19 +87,45 @@ const heroImage = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
   
   <!-- Netlify Identity Redirect Handler -->
   <script is:inline>
-    // Wait for Netlify Identity widget to load
-    if (window.netlifyIdentity) {
-      // Check if there's a confirmation token in the URL
+    // Function to handle confirmation tokens
+    function handleIdentityConfirmation() {
       const hash = window.location.hash;
       
       if (hash && (hash.includes('confirmation_token') || hash.includes('invite_token') || hash.includes('recovery_token'))) {
-        // Force the widget to open and process the token
-        window.netlifyIdentity.open();
+        // Widget is loaded, force it to open
+        if (window.netlifyIdentity) {
+          console.log('Opening Netlify Identity widget for confirmation...');
+          window.netlifyIdentity.open();
+        }
       }
+    }
+    
+    // Wait for widget to be ready
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', () => {
+        console.log('Netlify Identity initialized');
+        handleIdentityConfirmation();
+      });
       
       // Redirect to admin after successful login
       window.netlifyIdentity.on('login', () => {
+        console.log('User logged in, redirecting to admin...');
         window.location.href = '/admin/';
+      });
+    } else {
+      // Widget not loaded yet, wait for it
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on('init', () => {
+              handleIdentityConfirmation();
+            });
+            
+            window.netlifyIdentity.on('login', () => {
+              window.location.href = '/admin/';
+            });
+          }
+        }, 500);
       });
     }
   </script>
