@@ -1,0 +1,79 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+
+  # ── ROOMS ──
+  - name: "rooms"
+    label: "Rooms"
+    folder: "src/content/rooms"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Room Name", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Full Description", name: "body", widget: "markdown" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Gallery Images", name: "gallery", widget: "list",
+          field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Price Per Night", name: "price", widget: "number" }
+      - { label: "Room Size (sq ft)", name: "size", widget: "number" }
+      - { label: "Max Guests", name: "maxGuests", widget: "number" }
+      - { label: "Bed Type", name: "bedType", widget: "string" }
+      - { label: "View Type", name: "viewType", widget: "select",
+          options: ["Ocean View", "Harbor View", "Garden View", "Panoramic", "Partial Ocean"] }
+      - { label: "Badge", name: "badge", widget: "string", required: false }
+      - { label: "Amenities", name: "amenities", widget: "list",
+          field: { label: "Amenity", name: "amenity", widget: "string" } }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Sort Order", name: "order", widget: "number", default: 0 }
+
+  # ── SPECIAL OFFERS ──
+  - name: "offers"
+    label: "Special Offers"
+    folder: "src/content/offers"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Details", name: "body", widget: "markdown" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Discount", name: "discount", widget: "string" }
+      - { label: "Valid From", name: "validFrom", widget: "date" }
+      - { label: "Valid To", name: "validTo", widget: "date" }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+
+  # ── TESTIMONIALS ──
+  - name: "testimonials"
+    label: "Guest Reviews"
+    folder: "src/content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Guest Name", name: "title", widget: "string" }
+      - { label: "Quote", name: "quote", widget: "text" }
+      - { label: "Room Stayed", name: "room", widget: "string" }
+      - { label: "Date of Stay", name: "stayDate", widget: "string" }
+      - { label: "Rating", name: "rating", widget: "number", min: 1, max: 5 }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  # ── SITE SETTINGS ──
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Hotel Info"
+        name: "hotel-info"
+        file: "src/content/settings/hotel-info.json"
+        fields:
+          - { label: "Hotel Name", name: "name", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Address", name: "address", widget: "string" }
+          - { label: "Check-in Time", name: "checkin", widget: "string" }
+          - { label: "Check-out Time", name: "checkout", widget: "string" }
