@@ -23,6 +23,11 @@
           });
         }
       });
+      
+      // Redirect to homepage on logout
+      window.netlifyIdentity.on("logout", () => {
+        document.location.href = "/";
+      });
     }
   </script>
 </body>
